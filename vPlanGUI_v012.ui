@@ -1899,7 +1899,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <selectedon>../../PUB/vPlanSim/v_plan_sim_sokoban_automated/v_plan_sim_sokoban_sim_working/icons/media-step-forward-64.ico</selectedon>
+              <selectedon>icons/media-step-forward-64.ico</selectedon>
              </iconset>
             </property>
            </widget>
@@ -1911,7 +1911,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <selectedon>../../PUB/vPlanSim/v_plan_sim_sokoban_automated/v_plan_sim_sokoban_sim_working/icons/media-pause-64.ico</selectedon>
+              <selectedon>icons/media-pause-64.ico</selectedon>
              </iconset>
             </property>
            </widget>
@@ -1923,7 +1923,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <selectedon>../../PUB/vPlanSim/v_plan_sim_sokoban_automated/v_plan_sim_sokoban_sim_working/icons/sinchronize-64.ico</selectedon>
+              <selectedon>icons/sinchronize-64.ico</selectedon>
              </iconset>
             </property>
            </widget>
@@ -1935,7 +1935,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <selectedon>../../PUB/vPlanSim/v_plan_sim_sokoban_automated/v_plan_sim_sokoban_sim_working/icons/arrow-69-64.ico</selectedon>
+              <selectedon>icons/arrow-69-64.ico</selectedon>
              </iconset>
             </property>
             <property name="iconSize">
@@ -1953,7 +1953,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <selectedon>../../PUB/vPlanSim/v_plan_sim_sokoban_automated/v_plan_sim_sokoban_sim_working/icons/play-5-64.ico</selectedon>
+              <selectedon>icons/play-5-64.ico</selectedon>
              </iconset>
             </property>
            </widget>
