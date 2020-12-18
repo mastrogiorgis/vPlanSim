@@ -367,16 +367,21 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         self.writeUI(self.defaultUI)
 
     def disconnectAllSpinners(self):
-        # Disconnect from all the spinners so that clicking on the scene doesn't update the spinners anymore
-        try:
-            self.obstacleX.disconnect()
-            self.obstacleY.disconnect()
-            self.obstacleZ.disconnect()
-            self.entryGoalX.disconnect()
-            self.entryGoalY.disconnect()
-            self.entryGoalZ.disconnect()
-        except Exception:
-            pass
+       # Disconnect from all the spinners so that clicking on the scene doesn't update the spinners anymore
+        spinners = [
+            self.obstacleX,
+            self.obstacleY,
+            self.obstacleZ,
+            self.entryGoalX,
+            self.entryGoalY,
+            self.entryGoalZ,
+            self.entryGoalAngle
+        ]
+        for spinner in spinners:
+            try:
+                spinner.disconnect()
+            except Exception:
+                pass
 
     def clearStylesExcept(self, style):
         # Runs through the available styles and clears all except the one passed
