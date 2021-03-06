@@ -2,7 +2,7 @@
 An Open Source Graphical Interface for the Visualisation and Simulation of AI Systems
 
 
-Features of vPlanSim
+<h1>Features of vPlanSim</h1>
 
 
 The user defines the 3D geometry of the scene by adjusting the external and internal walls.
