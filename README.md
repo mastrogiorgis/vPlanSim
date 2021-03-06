@@ -17,7 +17,7 @@ The user can delete the entire scene or specific blocks from the walls and can a
 
 ![image](https://user-images.githubusercontent.com/23278410/110217307-32b28600-7eab-11eb-9edd-d8098861fcdf.png)
 
-The planning menu holds the generation of PDDL based on a particular domain and using the above geometry. The user can select the coordinates of goals, entries and elements, name the problem name, then generate and preview the PDDL problem file.
+The planning menu holds the generation of PDDL based on a particular domain and using the above geometry. The user can select the coordinates of goals, entries and elements, name the problem, then generate and preview the PDDL problem file.
 
 ![image](https://user-images.githubusercontent.com/23278410/110217433-f3386980-7eab-11eb-858a-c1c5457465ea.png)
 
