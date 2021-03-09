@@ -129,10 +129,9 @@ def toggleWallTransparency(renwinRef, renderers, blocks, transparentRef, progres
     for currentActor in wallActors:
         # check each of the actors and if it is currently an inert wall then set the opacity to match the current setting
         targetActorColours = currentActor.GetProperty().GetColor()
-        if targetActorColours == colours['intWallInert']:
-            currentActor.GetProperty().SetOpacity(opacity)
-        if targetActorColours == colours['extWallInert']:
-            currentActor.GetProperty().SetOpacity(opacity)
+        if (targetActorColours == colours['intWallInert']) or \
+            (targetActorColours == colours['extWallInert']):
+                currentActor.GetProperty().SetOpacity(opacity)
         # Update the progress bar
         iteration += 1
         percentComplete = int((iteration / numberActors) * 100)
