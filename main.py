@@ -277,6 +277,9 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         # self.showCoords.clicked.connect(self.toggleCaptions)
         self.showCoords.clicked.connect(lambda: annotate.toggleCaptions(self.renwin, renderers, blocks, self.showCoords, self.progressBar, ""))
 
+        # Toggle wall transparency
+        self.transparencyWall.clicked.connect(lambda: annotate.toggleWallTransparency(self.renwin, renderers, blocks, self.transparencyWall, self.progressBar, ""))
+
         # keypress interactions
         self.iren.AddObserver("KeyPressEvent", self.Keypress)
 
