@@ -27,12 +27,6 @@ import breeze_resources # dark gui
 import vis as graphics # local library, drawing functions of cubes etc
 from vis import colours    # the colour tuples, stored in vis.py so they need only be changed once
 
-# import math
-# import os
-
-# import copy
-
-
 # import sokoban as sb
 
 #imports for the simulation of each domain
