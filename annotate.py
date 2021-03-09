@@ -119,7 +119,7 @@ def toggleWallTransparency(renwinRef, renderers, blocks, transparentRef, progres
     iteration = 0
 
     if transparentRef.isChecked() == True:
-        opacity = 0.5
+        opacity = 0.2
     else:
         opacity = 1.0
 
