@@ -359,7 +359,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
             'obstacleX': 2, 'obstacleY': 3, 'obstacleZ': 5,
             'undoSpinBox': 10, 'elementsNumber': 4,
             'entryGoalX': 0, 'entryGoalY': 0, 'entryGoalZ': 0, 'entryGoalAngle': 0,
-            'floor': True, 'grid': False, 'axis': False, 'showCoords': False,
+            'floor': True, 'grid': False, 'axis': False, 'showCoords': False, 'transparencyWall': False,
             'domainName': 0, 'planningComboBox': 0, 'problemName': 'helloworld'
         }
 
@@ -540,7 +540,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
     def saveUI(self):
         # Read all of the UI elements, by type, and save their names and current values to a dictionary
         # Then return the dictionary
-        UIDictionary = {}
+        dic = {}
         # Collect all the UI objects
         qtSpinners = self.findChildren((QtWidgets.QSpinBox))
         qtCheckboxes = self.findChildren((QtWidgets.QCheckBox))

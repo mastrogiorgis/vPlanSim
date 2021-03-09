@@ -646,19 +646,6 @@
           <property name="verticalSpacing">
            <number>2</number>
           </property>
-          <item row="2" column="1">
-           <widget class="QRadioButton" name="viewSide">
-            <property name="font">
-             <font>
-              <family>Arial</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Side view</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
            <widget class="QCheckBox" name="floor">
             <property name="font">
@@ -675,8 +662,8 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="grid">
+          <item row="2" column="1">
+           <widget class="QRadioButton" name="viewSide">
             <property name="font">
              <font>
               <family>Arial</family>
@@ -684,7 +671,20 @@
              </font>
             </property>
             <property name="text">
-             <string>Grid</string>
+             <string>Side view</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="showCoords">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Show coordinates</string>
             </property>
            </widget>
           </item>
@@ -701,8 +701,8 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="showCoords">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="grid">
             <property name="font">
              <font>
               <family>Arial</family>
@@ -710,7 +710,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Show coordinates</string>
+             <string>Grid</string>
             </property>
            </widget>
           </item>
@@ -740,6 +740,18 @@
             </property>
             <property name="checked">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QCheckBox" name="transparencyWall">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Wall transparency</string>
             </property>
            </widget>
           </item>
