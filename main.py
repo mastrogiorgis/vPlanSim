@@ -27,12 +27,6 @@ import breeze_resources # dark gui
 import vis as graphics # local library, drawing functions of cubes etc
 from vis import colours    # the colour tuples, stored in vis.py so they need only be changed once
 
-# import math
-# import os
-
-# import copy
-
-
 # import sokoban as sb
 
 #imports for the simulation of each domain
@@ -716,10 +710,31 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
                         reverseAction = 'intinerttrue'
                     if targetActorColours == colours['extWallInert']:
                         reverseAction = 'extinerttrue'
+                    if targetActorColours == colours['obstacleInert']:
+                        reverseAction = 'obsinerttrue'
+                    if targetActorColours == colours['obstacleGoal']:
+                        reverseAction = 'obsgoaltrue'
+                    if targetActorColours == colours['obstacleEntry']:
+                        reverseAction = 'obsentrytrue'
                     # Populate the reverseSet action
                     reverseSet[0] = reverseAction
 
                     # Now make the change to the scene
+                    if operation == "obsinerttrue":
+                        # Populate the reverseSet action
+                        # reverseSet[0] = reverseAction
+                        targets[0].GetProperty().SetColor(colours['obstacleInert'])
+
+                    if operation == "obsgoaltrue":
+                        # Populate the reverseSet action
+                        # reverseSet[0] = reverseAction
+                        targets[0].GetProperty().SetColor(colours['obstacleGoal'])
+
+                    if operation == "obsentrytrue":
+                        # Populate the reverseSet action
+                        # reverseSet[0] = reverseAction
+                        targets[0].GetProperty().SetColor(colours['obstacleEntry'])
+
                     if operation == "floorgoaltrue":
                         # Populate the reverseSet action
                         # reverseSet[0] = reverseAction
@@ -877,7 +892,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         # Prep undoSet
         undoSet = ['removeactor', blocks]
         for objPosY in range(obstMaxY):
-            actorcube = graphics.cube_from_source(obstX, objPosY, obstZ, showCoordsBool, 'intWallInert')
+            actorcube = graphics.cube_from_source(obstX, objPosY, obstZ, showCoordsBool, 'obstacleInert')
             renderers[blocks].AddActor(actorcube)
             # Add the new prop to the undoSet as well
             undoSet.append(actorcube)
@@ -947,6 +962,15 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
                     if currentActorColours == colours['extWallInert']:
                         undoActorColours[0] = 'extinerttrue'
                         objType = 'extWall'
+                    if currentActorColours == colours['obstacleInert']:
+                        undoActorColours[0] = 'obsinerttrue'
+                        objType = 'obstacle'
+                    if currentActorColours == colours['obstacleGoal']:
+                        undoActorColours[0] = 'obsgoaltrue'
+                        objType = 'obstacle'
+                    if currentActorColours == colours['obstacleEntry']:
+                        undoActorColours[0] = 'obsentrytrue'
+                        objType = 'obstacle'
                     # Save the existing actor to the undoSet
                     undoActorColours.append(currentActor)
 
@@ -963,17 +987,23 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
                             currentActor.GetProperty().SetColor(colours['intWallInert'])
                         if objType == 'extWall':
                             currentActor.GetProperty().SetColor(colours['extWallInert'])
+                        if objType == 'obstacle':
+                            currentActor.GetProperty().SetColor(colours['obstacleInert'])
                     else:
                         if targetAction == "Set goals":
                             if objType == 'intWall':
                                 currentActor.GetProperty().SetColor(colours['intWallGoal'])
                             if objType == 'extWall':
                                 currentActor.GetProperty().SetColor(colours['extWallGoal'])
+                            if objType == 'obstacle':
+                                currentActor.GetProperty().SetColor(colours['obstacleGoal'])
                         if targetAction == "Set entries":
                             if objType == 'intWall':
                                 currentActor.GetProperty().SetColor(colours['intWallEntry'])
                             if objType == 'extWall':
                                 currentActor.GetProperty().SetColor(colours['extWallEntry'])
+                            if objType == 'obstacle':
+                                currentActor.GetProperty().SetColor(colours['obstacleEntry'])
                         # Set the unused edge colour to reflect the angle passed in as self.angle
                         # Cast the angle value to a string
                         angleList = list(str(angle))
