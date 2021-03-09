@@ -121,7 +121,7 @@ def toggleWallTransparency(renwinRef, renderers, blocks, transparentRef, progres
     if transparentRef.isChecked() == True:
         opacity = opacities['transparent']
     else:
-        opacity = 1.0
+        opacity = opacities['opaque']
 
     # Get a list of the wall actors in the scene
     wallActors = scanScene.get_wall_actors(renderers, blocks)
