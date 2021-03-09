@@ -39,7 +39,7 @@ dimensions = {
 opacities = {
     'floor': 1.0,
     'cube': 1.0,
-    'transparent': 0.9,
+    'transparent': 0.05,
     'opaque': 1.0
 }
 
