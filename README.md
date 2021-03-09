@@ -24,3 +24,8 @@ The planning menu holds the generation of PDDL based on a particular domain and 
 Finally, the user can visually simulate step-by-step the plan (after solving the PDDL problem).
 
 <img src="https://user-images.githubusercontent.com/23278410/110217536-69d56700-7eac-11eb-96b6-da1d64e7174c.png" width=400>
+
+<h1>Guide for new domains</h1>
+
+Users can create their own generated PDDL problems by modifying the two given examples (sokoban.py and derived_drone.py). The generatePDDLproblem should be modified to reflect the new domain.
+<img src="https://user-images.githubusercontent.com/23278410/110531814-f2a20c00-8113-11eb-8267-3e689915e174.png" width=400>
