@@ -537,7 +537,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
     def saveUI(self):
         # Read all of the UI elements, by type, and save their names and current values to a dictionary
         # Then return the dictionary
-        dic = {}
+        UIDictionary = {}
         # Collect all the UI objects
         qtSpinners = self.findChildren((QtWidgets.QSpinBox))
         qtCheckboxes = self.findChildren((QtWidgets.QCheckBox))
