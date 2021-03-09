@@ -849,13 +849,13 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         if style == 'removefloor':
             undoSet = floormethods.removeFloor(renderers, blocks)
         if style == 'out':
-            undoCollection = add_walls.setWalls(self.renwin, renderers, blocks, int(self.roomX.value()), int(self.roomY.value()), int(self.roomZ.value()), self.progressBar, self.showCoords, self.floor)
+            undoCollection = add_walls.setWalls(self.renwin, renderers, blocks, int(self.roomX.value()), int(self.roomY.value()), int(self.roomZ.value()), self.progressBar, self.showCoords, self.floor, self.transparencyWall)
         if style == '2X':
-            undoSet = add_walls.setInWalls_2X(self.renwin, renderers, blocks, int(self.wallParallel2X_W.value()), int(self.wallParallel2X_D.value()), int(self.wallParallel2X_H.value()), self.progressBar, self.showCoords)
+            undoSet = add_walls.setInWalls_2X(self.renwin, renderers, blocks, int(self.wallParallel2X_W.value()), int(self.wallParallel2X_D.value()), int(self.wallParallel2X_H.value()), self.progressBar, self.showCoords, self.transparencyWall)
         if style == '2Z':
-            undoSet = add_walls.setInWalls_2Z(self.renwin, renderers, blocks, int(self.wallParallel2Z_W.value()), int(self.wallParallel2Z_D.value()), int(self.wallParallel2Z_H.value()), self.progressBar, self.showCoords)
+            undoSet = add_walls.setInWalls_2Z(self.renwin, renderers, blocks, int(self.wallParallel2Z_W.value()), int(self.wallParallel2Z_D.value()), int(self.wallParallel2Z_H.value()), self.progressBar, self.showCoords, self.transparencyWall)
         if style == 'obstacle':
-            undoSet = self.saveObstacleFromSpinners(renderers, blocks, int(self.obstacleX.value()), int(self.obstacleY.value()), int(self.obstacleZ.value()))
+            undoSet = self.saveObstacleFromSpinners(renderers, blocks, int(self.obstacleX.value()), int(self.obstacleY.value()), int(self.obstacleZ.value()), self.transparencyWall)
         if style == 'truncate':
             undoSet = add_walls.truncateWalls(self.renwin, renderers, blocks, int(self.roomY.value()), self.progressBar, self.showCoords)
 
@@ -890,12 +890,13 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         self.renwin.Render()
         return
 
-    def saveObstacleFromSpinners(self, renderers, blocks, obstX, obstMaxY, obstZ):
+    def saveObstacleFromSpinners(self, renderers, blocks, obstX, obstMaxY, obstZ, transparencyRef):
         showCoordsBool = self.showCoords.isChecked()
+        wallsTransparentBool = transparencyRef.isChecked()
         # Prep undoSet
         undoSet = ['removeactor', blocks]
         for objPosY in range(obstMaxY):
-            actorcube = graphics.cube_from_source(obstX, objPosY, obstZ, showCoordsBool, 'obstacleInert')
+            actorcube = graphics.cube_from_source(obstX, objPosY, obstZ, showCoordsBool, 'obstacleInert', wallsTransparentBool)
             renderers[blocks].AddActor(actorcube)
             # Add the new prop to the undoSet as well
             undoSet.append(actorcube)

@@ -3,7 +3,7 @@
 """
 
 from vtk import vtkPropAssembly, vtkPropPicker, vtkPropCollection
-from vis import colours
+from vis import colours, opacities
 import scanScene
 
 def set_axis(renwinRef, renderers, annotations, axisRef, axesActor, key):
@@ -119,7 +119,7 @@ def toggleWallTransparency(renwinRef, renderers, blocks, transparentRef, progres
     iteration = 0
 
     if transparentRef.isChecked() == True:
-        opacity = 0.2
+        opacity = opacities['transparent']
     else:
         opacity = 1.0
 

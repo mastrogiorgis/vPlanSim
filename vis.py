@@ -38,7 +38,9 @@ dimensions = {
 
 opacities = {
     'floor': 1.0,
-    'cube': 1.0
+    'cube': 1.0,
+    'transparent': 0.9,
+    'opaque': 1.0
 }
 
 
@@ -141,7 +143,7 @@ def pointer(x, y, z, radius):
 
     return pointer
 
-def cube_from_source(x, y, z, visibility, colour):
+def cube_from_source(x, y, z, visibility, colour, transparency):
     img = 'OIZV2N0.jpg'
 
     # Cast the positions to text so they can be added as labels
@@ -205,7 +207,10 @@ def cube_from_source(x, y, z, visibility, colour):
     cube = vtk.vtkActor()
     cube.SetMapper(mapper)
     cube.GetProperty().SetColor(colours[colour])
-    cube.GetProperty().SetOpacity(opacities['cube'])
+    if transparency == True:
+        cube.GetProperty().SetOpacity(opacities['transparent'])
+    else:
+        cube.GetProperty().SetOpacity(opacities['opaque'])
 
     # Assemble the cube and annotations into a complete prop actor.
     actor = vtk.vtkPropAssembly()
