@@ -7,7 +7,7 @@ import floormethods
 import annotate
 import scanScene
 
-def setWalls(renwinRef, renderers, blocks, objLengthX, objHeightY, objWidthZ, progressBarRef, showCoordsRef, floorRef):
+def setWalls(renwinRef, renderers, blocks, objLengthX, objHeightY, objWidthZ, progressBarRef, showCoordsRef, floorRef, transparencyRef):
     # Called when the set button is clicked in the outside walls UI
     # This is basically "draw a rectangle, measured from 0,0,0 to the length, width, height specified
     # Iterate over the all the z over all the y, and those over all the x
@@ -15,6 +15,7 @@ def setWalls(renwinRef, renderers, blocks, objLengthX, objHeightY, objWidthZ, pr
     # So as to build a hollow object representing the exterior walls only, and not a monolithic block
 
     showCoordsBool = showCoordsRef.isChecked()
+    wallsTransparentBool = transparencyRef.isChecked()
     # Prep undoCollection to be returned, and individual undoSet for activities in this function
     undoCollection = []
     undoWalls = ['removeactor', blocks]
@@ -30,7 +31,7 @@ def setWalls(renwinRef, renderers, blocks, objLengthX, objHeightY, objWidthZ, pr
                     # Only needs to build a cube on the min or max of the x (length) or z (width) axes
                     # Send the x, y, z coordinates to the helper function, which returns a vtkPropAssembly
                     # consisting of a cube and a caption
-                    actorcube = cube_from_source(x, y, z, showCoordsBool, 'extWallInert')
+                    actorcube = cube_from_source(x, y, z, showCoordsBool, 'extWallInert', wallsTransparentBool)
                     # Add the new prop to the blocks renderer
                     renderers[blocks].AddActor(actorcube)
                     # Add the new prop to the undoSet as well
@@ -53,8 +54,9 @@ def setWalls(renwinRef, renderers, blocks, objLengthX, objHeightY, objWidthZ, pr
 
     return undoCollection
 
-def setInWalls_2X(renwinRef, renderers, blocks, objPosX, objWidthZ, objHeightY, progressBarRef, showCoordsRef):
+def setInWalls_2X(renwinRef, renderers, blocks, objPosX, objWidthZ, objHeightY, progressBarRef, showCoordsRef, transparencyRef):
     showCoordsBool = showCoordsRef.isChecked()
+    wallsTransparentBool = transparencyRef.isChecked()
     # Prep undoSet
     undoSet = ['removeactor', blocks]
     progressBarRef.setProperty("value", 0)
@@ -62,7 +64,7 @@ def setInWalls_2X(renwinRef, renderers, blocks, objPosX, objWidthZ, objHeightY, 
     numberPotentialCubes = objPosX * objHeightY
     for x in range(objPosX):
             for y in range(objHeightY):
-                actorcube = cube_from_source(x, y, objWidthZ, showCoordsBool, 'intWallInert')
+                actorcube = cube_from_source(x, y, objWidthZ, showCoordsBool, 'intWallInert', wallsTransparentBool)
                 renderers[blocks].AddActor(actorcube)
                 # Add the new prop to the undoSet as well
                 undoSet.append(actorcube)
@@ -78,8 +80,9 @@ def setInWalls_2X(renwinRef, renderers, blocks, objPosX, objWidthZ, objHeightY, 
 
     return undoSet
 
-def setInWalls_2Z(renwinRef, renderers, blocks, objPosX, objWidthZ, objHeightY, progressBarRef, showCoordsRef):
+def setInWalls_2Z(renwinRef, renderers, blocks, objPosX, objWidthZ, objHeightY, progressBarRef, showCoordsRef, transparencyRef):
     showCoordsBool = showCoordsRef.isChecked()
+    wallsTransparentBool = transparencyRef.isChecked()
     # Prep undoSet
     undoSet = ['removeactor', blocks]
     progressBarRef.setProperty("value", 0)
@@ -87,7 +90,7 @@ def setInWalls_2Z(renwinRef, renderers, blocks, objPosX, objWidthZ, objHeightY, 
     numberPotentialCubes = objWidthZ * objHeightY
     for z in range(objWidthZ):
             for y in range(objHeightY):
-                actorcube = cube_from_source(objPosX, y, z, showCoordsBool, 'intWallInert')
+                actorcube = cube_from_source(objPosX, y, z, showCoordsBool, 'intWallInert', wallsTransparentBool)
                 renderers[blocks].AddActor(actorcube)
                 # Add the new prop to the undoSet as well
                 undoSet.append(actorcube)

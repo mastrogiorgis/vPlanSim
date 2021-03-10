@@ -9,12 +9,15 @@ import vtk
 colours = {
     'extWallInert': (1, 1, 1),
     'intWallInert': (0.95, 0.95, 0.95),
+    'obstacleInert': (0.90, 0.90, 0.90),
     'floorInert': (1, .5, .5),
     'extWallGoal': (0.5, 1.5, 0.5),
     'intWallGoal': (0.45, 1.45, 0.45),
+    'obstacleGoal': (0.40, 1.40, 0.40),
     'floorGoal': (0.5, 1.0, 0),
     'extWallEntry': (0.5, 0.5, 1.5),
     'intWallEntry': (0.45, 0.45, 1.45),
+    'obstacleEntry': (0.40, 0.40, 1.40),
     'floorEntry': (.5, .5, 1),
     'floorElement': (1, 0.7, 0.1),
     'captionColour': (1, 0, 0),
@@ -35,7 +38,9 @@ dimensions = {
 
 opacities = {
     'floor': 1.0,
-    'cube': 1.0
+    'cube': 1.0,
+    'transparent': 0.05,
+    'opaque': 1.0
 }
 
 
@@ -138,7 +143,7 @@ def pointer(x, y, z, radius):
 
     return pointer
 
-def cube_from_source(x, y, z, visibility, colour):
+def cube_from_source(x, y, z, visibility, colour, transparency):
     img = 'OIZV2N0.jpg'
 
     # Cast the positions to text so they can be added as labels
@@ -202,7 +207,10 @@ def cube_from_source(x, y, z, visibility, colour):
     cube = vtk.vtkActor()
     cube.SetMapper(mapper)
     cube.GetProperty().SetColor(colours[colour])
-    cube.GetProperty().SetOpacity(opacities['cube'])
+    if transparency == True:
+        cube.GetProperty().SetOpacity(opacities['transparent'])
+    else:
+        cube.GetProperty().SetOpacity(opacities['opaque'])
 
     # Assemble the cube and annotations into a complete prop actor.
     actor = vtk.vtkPropAssembly()

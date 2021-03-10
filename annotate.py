@@ -3,6 +3,7 @@
 """
 
 from vtk import vtkPropAssembly, vtkPropPicker, vtkPropCollection
+from vis import colours, opacities
 import scanScene
 
 def set_axis(renwinRef, renderers, annotations, axisRef, axesActor, key):
@@ -102,5 +103,39 @@ def toggleCaptions(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, 
         iteration += 1
         percentComplete = int((iteration / numberProps) * 100)
         progressBarRef.setProperty("value", percentComplete)
+    renwinRef.Render()
+    return
+
+def toggleWallTransparency(renwinRef, renderers, blocks, transparentRef, progressBarRef, key):
+    # Currently doesn't respond to keypreses
+    # If the key is used, switch the status of the checkbox
+    if (key == 'key'):
+        if (transparentRef.isChecked() == True):
+            transparentRef.setChecked(False)
+        else:
+            transparentRef.setChecked(True)
+
+    progressBarRef.setProperty("value", 0)
+    iteration = 0
+
+    if transparentRef.isChecked() == True:
+        opacity = opacities['transparent']
+    else:
+        opacity = opacities['opaque']
+
+    # Get a list of the wall actors in the scene
+    wallActors = scanScene.get_wall_actors(renderers, blocks)
+    numberActors = len(wallActors)
+    for currentActor in wallActors:
+        # check each of the actors and if it is currently an inert wall then set the opacity to match the current setting
+        targetActorColours = currentActor.GetProperty().GetColor()
+        if (targetActorColours == colours['intWallInert']) or \
+            (targetActorColours == colours['extWallInert']):
+                currentActor.GetProperty().SetOpacity(opacity)
+        # Update the progress bar
+        iteration += 1
+        percentComplete = int((iteration / numberActors) * 100)
+        progressBarRef.setProperty("value", percentComplete)
+
     renwinRef.Render()
     return
