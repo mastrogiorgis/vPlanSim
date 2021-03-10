@@ -16,44 +16,48 @@ class drone():
     def generatePDDLproblem(self, domain, problemName, wallcoords, elements, entries, goal_data):
         print('Drone called\n')
         # get the maximum value of X,Y,Z coordinates to be used for the coord and plus* parameters
-        maxOfCoods = np.max(wallcoords)
+        maxOfCoods = np.max(wallcoords) + 1 # add 1 to be inclusive of the max coordinate used later in the for loops
+        
+        #print("coords = ", maxOfCoods)
+        #print("walls = ", wallcoords)
         
         problem_file_name='problem_' + problemName+".pddl"
         exp = "{}".format(problem_file_name)
         problem = open(exp,"w")
         problem.write("(define (problem " + problemName + ") (:domain " + domain + ")\n")
-        problem.write("\t")
-        problem.write('(objects: \n')
+        
+        problem.write('(objects: \n\t\t')
         for pos in range(maxOfCoods):
+            #print(pos)
             problem.write("c%d "%pos)
         problem.write(" - coord\n")
         problem.write(")\n")
-        problem.write("  (:init\n\t")
+        problem.write("(:init\n\t\t")
 
         for coord in range(maxOfCoods-1):
             to_coord=coord+1
             problem.write("(plus_one c%i c%i) "%(coord,to_coord))
-        problem.write("\n")
+        problem.write("\n\t\t")
 
         for coord in range(maxOfCoods-3):
             to_coord=coord+3
             problem.write("(plus_three c%i c%i) "%(coord,to_coord))
-        problem.write("\n")
+        problem.write("\n\t\t")
 
         for coord in range(maxOfCoods-4):
             to_coord=coord+4
             problem.write("(plus_four c%i c%i) "%(coord,to_coord))
-        problem.write("\n")
+        problem.write("\n\n\t\t")
 
 
         for i in range(len(entries)):
             x, y, z = entries[i][0], entries[i][1], entries[i][2] # the plus 1 is to have the aperture at 2 blocks tall
-            problem.write('\t\t(at_aperture c{} c{} c{}) \n'.format(x, y, z))
+            problem.write('\t(at_aperture c{} c{} c{}) \n\n'.format(x, y, z))
 
 
 
         for var in range(elements):
-            problem.write("\t(at_agent s%i outC outC outC)\n"%var)
+            problem.write("\t\t(at_agent s%i outC outC outC)\n"%var)
         #problem.write("\t(at_agent1 s%i c0 c0 c1)\n"%(agents-2))
         #problem.write("\t(at_agent2 s%i c1 c0 c1)\n"%(agents-2))
         #problem.write("\t(at_agent3 s%i c2 c0 c1)\n"%(agents-2))
@@ -63,7 +67,7 @@ class drone():
         #closing init
         problem.write(")\n")
 
-        problem.write("(:goal (and\n")
+        problem.write("(:goal  (and\n")
         #problem.write("\t(at_agent s%i c0 c0 c1)\n"%(agents-1))a
         #for var in range(agents):
         for i in range(len(goal_data)):

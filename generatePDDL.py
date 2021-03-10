@@ -92,7 +92,7 @@ def writefile(renderers, blocks, dName, problemText, elementsNo):
             soko.generatePDDLproblem('p01-domain', problemText, wallsFullList, elementsFullList, entriesFullList, goalsFullList)
         elif dName == 'Drone':
             dron = dr.drone()
-            dron.generatePDDLproblem('derived_drone',problemText,wallsFullList,elementsNo,entriesFullList,goalsFullList)
+            dron.generatePDDLproblem('derived_drone', problemText, wallsFullList, elementsNo, entriesFullList, goalsFullList)
     else:
         # At least one of the lists of data is empty, which is not supported. So write an error to the exported file.
         pddlFileHandle.write("Please ensure the scene has some walls, at least one goal point, one entry point, and at least one element.")
