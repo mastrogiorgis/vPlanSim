@@ -1,8 +1,15 @@
 # vPlanSim
 An Open Source Graphical Interface for the Visualisation and Simulation of AI Systems
 
+## Requirements
+Python3.7 +
 
-<h1>Features of vPlanSim</h1>
+VTK8.2 +
+
+PyQt5 +
+
+
+## Features of vPlanSim
 
 
 The user defines the 3D geometry of the scene by adjusting the external and internal walls.
@@ -30,15 +37,38 @@ Finally, the user can visually simulate step-by-step the plan (after solving the
 Users can create their own generated PDDL problems by modifying the two given examples (sokoban.py and derived_drone.py). The generatePDDLproblem should be modified to reflect the new domain.
 <img src="https://user-images.githubusercontent.com/23278410/110531814-f2a20c00-8113-11eb-8267-3e689915e174.png" width=400>
 
-<h1>Examples </h1>
+## Examples
 
-Sokoban domain
+<b>Sokoban domain</b>
+
+Using domain found in https://github.com/AI-Planning/classical-domains/tree/master/classical/sokoban-opt08-strips
+
+Required files to run the demo can be found under domain folder
 
 <img src="https://user-images.githubusercontent.com/23278410/110846255-7e966e00-82a3-11eb-91a4-d09574753024.gif" width=400>
 
-Drone domain
+<b>Drone domain</b>
+
+Using a bespoke drone domain
+
+Required files to run the demo can be found under domain folder
 
 <img src="https://user-images.githubusercontent.com/23278410/110845863-029c2600-82a3-11eb-99e0-cad0c7c4f475.gif" width=400>
 
 
-
+## Citation
+<hl>
+Please cite our work if you use vPlanSim
+ 
+ 
+```bib
+@inproceedings{f285037a2054446b8435ef7e4b48c9df,
+title = "vPlanSim: An Open Source Graphical Interface for the Visualisation and Simulation of AI Systems",
+author = "Jamie Roberts and Georgios Mastorakis and Brad Lazaruk and {Franco Aixela}, Santiago and Adam Stokes and Sara Bernardini",
+year = "2021",
+month = feb,
+day = "16",
+language = "English",
+booktitle = "The 31st International Conference on Automated Planning and Scheduling (ICAPS 2021)",
+}
+```
