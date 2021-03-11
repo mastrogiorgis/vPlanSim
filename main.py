@@ -907,7 +907,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         # Prep undoSet
         undoSet = ['removeactor', blocks]
         for objPosY in range(obstMaxY):
-            actorcube = graphics.cube_from_source(obstX, objPosY, obstZ, showCoordsBool, 'obstacleInert', wallsTransparentBool)
+            actorcube = graphics.cube_from_source(obstX, objPosY, obstZ, showCoordsBool, 'obstacleInert', False)
             renderers[blocks].AddActor(actorcube)
             # Add the new prop to the undoSet as well
             undoSet.append(actorcube)
