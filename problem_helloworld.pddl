@@ -71,11 +71,10 @@
 	 pos-8-6 - location
 	 pos-8-7 - location
 	 pos-8-8 - location
-	 stones-01 - stones
 
 	)
 	(:init
-	 (IS-GOAL pos-3-6)
+	 (IS-GOAL pos-4-5)
 
 	 (IS-NONGOAL pos-7-3)
 	 (IS-NONGOAL pos-1-3)
@@ -94,7 +93,6 @@
 	 (IS-NONGOAL pos-3-2)
 	 (IS-NONGOAL pos-2-6)
 	 (IS-NONGOAL pos-8-2)
-	 (IS-NONGOAL pos-4-5)
 	 (IS-NONGOAL pos-1-4)
 	 (IS-NONGOAL pos-7-5)
 	 (IS-NONGOAL pos-2-3)
@@ -122,6 +120,7 @@
 	 (IS-NONGOAL pos-4-4)
 	 (IS-NONGOAL pos-6-3)
 	 (IS-NONGOAL pos-1-5)
+	 (IS-NONGOAL pos-3-6)
 	 (IS-NONGOAL pos-2-2)
 	 (IS-NONGOAL pos-8-6)
 	 (IS-NONGOAL pos-4-1)
@@ -259,7 +258,7 @@
 	 (MOVE-DIR pos-5-2 pos-5-1 dir-up)
 	 (MOVE-DIR pos-5-2 pos-5-3 dir-down)
 	 (MOVE-DIR pos-5-2 pos-6-2 dir-right)
-	 (MOVE-DIR pos-5-3 pos-1 dir-left)
+	 (MOVE-DIR pos-5-3 pos-4-3 dir-left)
 	 (MOVE-DIR pos-5-3 pos-5-2 dir-up)
 	 (MOVE-DIR pos-5-3 pos-5-4 dir-down)
 	 (MOVE-DIR pos-5-3 pos-6-3 dir-right)
@@ -364,9 +363,8 @@
 	 (MOVE-DIR pos-8-7 pos-8-8 dir-down)
 	 (MOVE-DIR pos-8-8 pos-7-8 dir-left)
 	 (MOVE-DIR pos-8-8 pos-8-7 dir-up)
-	 (at player-01 pos-4-3)
+	 (at player-01 pos-5-4)
 
-	 (at stone pos-1-2)
 
 	 (clear pos-7-3)
 	 (clear pos-4-7)
@@ -385,6 +383,7 @@
 	 (clear pos-8-5)
 	 (clear pos-5-8)
 	 (clear pos-7-2)
+	 (clear pos-1-2)
 	 (clear pos-6-7)
 	 (clear pos-5-5)
 	 (clear pos-3-3)
@@ -401,7 +400,6 @@
 	 (clear pos-6-4)
 	 (clear pos-3-2)
 	 (clear pos-2-6)
-	 (clear pos-5-4)
 	 (clear pos-8-2)
 	 (clear pos-7-1)
 	 (clear pos-4-5)
@@ -426,6 +424,7 @@
 	 (clear pos-7-4)
 	 (clear pos-1-8)
 	 (clear pos-8-8)
+	 (clear pos-4-3)
 	 (clear pos-1-7)
 	 (clear pos-3-4)
 	 (clear pos-2-4)
