@@ -35,7 +35,17 @@ Finally, the user can visually simulate step-by-step the plan (after solving the
 <h1>Guide for new domains</h1>
 
 Users can create their own generated PDDL problems by modifying the two given examples (sokoban.py and derived_drone.py). The generatePDDLproblem should be modified to reflect the new domain.
+
 <img src="https://user-images.githubusercontent.com/23278410/110531814-f2a20c00-8113-11eb-8267-3e689915e174.png" width=400>
+
+Then define the parameters in the example problem: 
+
+<img src="https://user-images.githubusercontent.com/23278410/110857423-beb01d80-82b0-11eb-8e93-8f8298f64e98.png" width=400> 
+
+into the python script:
+
+<img src="https://user-images.githubusercontent.com/23278410/110857215-7a248200-82b0-11eb-8f73-dc8615558477.png" width=400>
+
 
 ## Examples
 
