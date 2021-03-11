@@ -1,0 +1,33 @@
+insert s2 c4 c4 c0
+walk_plusz s2 c4 c4 c0 c4 c4 c1
+walk_plusz s2 c4 c4 c1 c4 c4 c2
+walk_minusx s2 c4 c4 c2 c3 c4 c2
+insert s3 c4 c4 c0
+walk_plusz s3 c4 c4 c0 c4 c4 c1
+walk_plusz s3 c4 c4 c1 c4 c4 c2
+walk_plusz s2 c3 c4 c2 c3 c4 c3
+walk_plusz s3 c4 c4 c2 c4 c4 c3
+walk_plusy s2 c3 c4 c3 c3 c5 c3
+walk_plusz s2 c3 c5 c3 c3 c5 c4
+walk_minusx s2 c3 c5 c4 c2 c5 c4
+walk_plusz s2 c2 c5 c4 c2 c5 c5
+insert s0 c4 c4 c0
+walk_minusy s0 c4 c4 c0 c4 c3 c0
+walk_minusx s0 c4 c3 c0 c3 c3 c0
+walk_minusy s0 c3 c3 c0 c3 c2 c0
+walk_minusx s0 c3 c2 c0 c2 c2 c0
+walk_minusy s0 c2 c2 c0 c2 c1 c0
+walk_minusx s0 c2 c1 c0 c1 c1 c0
+walk_plusz s0 c1 c1 c0 c1 c1 c1
+insert s1 c4 c4 c0
+walk_plusx s1 c4 c4 c0 c5 c4 c0
+walk_plusz s1 c5 c4 c0 c5 c4 c1
+walk_plusy s1 c5 c4 c1 c5 c5 c1
+walk_plusz s1 c5 c5 c1 c5 c5 c2
+walk_plusy s1 c5 c5 c2 c5 c6 c2
+walk_plusz s1 c5 c6 c2 c5 c6 c3
+walk_minusy s3 c4 c4 c3 c4 c3 c3
+walk_minusx s3 c4 c3 c3 c3 c3 c3
+walk_plusz s3 c3 c3 c3 c3 c3 c4
+walk_minusy s3 c3 c3 c4 c3 c2 c4
+walk_plusz s3 c3 c2 c4 c3 c2 c5
