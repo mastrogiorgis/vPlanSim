@@ -29,3 +29,12 @@ Finally, the user can visually simulate step-by-step the plan (after solving the
 
 Users can create their own generated PDDL problems by modifying the two given examples (sokoban.py and derived_drone.py). The generatePDDLproblem should be modified to reflect the new domain.
 <img src="https://user-images.githubusercontent.com/23278410/110531814-f2a20c00-8113-11eb-8267-3e689915e174.png" width=400>
+
+<h1>Sokoban domain demo</h1>
+![sokoban_example_ICAPS2021](https://user-images.githubusercontent.com/23278410/110846255-7e966e00-82a3-11eb-91a4-d09574753024.gif)
+
+<h1>Drone domain demo</h1>
+![drone_example_ICAPS2021](https://user-images.githubusercontent.com/23278410/110845863-029c2600-82a3-11eb-99e0-cad0c7c4f475.gif)
+
+
+
