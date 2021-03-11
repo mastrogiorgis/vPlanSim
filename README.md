@@ -51,7 +51,7 @@ into the python script:
 
 <b>Sokoban domain</b>
 
-Using domain found in https://github.com/AI-Planning/classical-domains/tree/master/classical/sokoban-opt08-strips
+Using domain found in https://github.com/AI-Planning/classical-domains/tree/master/classical/sokoban-opt08-strips (p01.pddl)
 
 Required files to run the demo can be found under domain folder
 
@@ -67,7 +67,7 @@ Required files to run the demo can be found under domain folder
 
 
 ## Citation
-<hl>
+
 Please cite our work if you use vPlanSim
  
  
