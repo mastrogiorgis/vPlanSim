@@ -249,8 +249,8 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         self.gridG = graphics.structured_grid_2(100, 0.1, 100, 0.5)
 
         #corners
-        self.corners = graphics.worldCorners(100, 100)
-        renderers[annotations].AddActor(self.corners)
+        # self.corners = graphics.worldCorners(100, 100)
+        # renderers[annotations].AddActor(self.corners)
 
         #qt gui interaction
         # toggle axis UI
