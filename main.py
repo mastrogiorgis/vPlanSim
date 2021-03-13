@@ -248,10 +248,6 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         #grid - call vis
         self.gridG = graphics.structured_grid_2(100, 0.1, 100, 0.5)
 
-        #corners
-        self.corners = graphics.worldCorners(100, 100)
-        renderers[annotations].AddActor(self.corners)
-
         #qt gui interaction
         # toggle axis UI
         # self.axis.clicked.connect(self.set_axis)
@@ -404,7 +400,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
             # Remove any existing pointers by clearing that renderer
             renderers[pointers].RemoveAllViewProps()
             self.disconnectAllSpinners()
-            self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+            self.iren.SetInteractorStyle(self.style)
             self.renwin.Render()
 
     def obstacleBtnClicked(self):
@@ -417,18 +413,17 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
             # Remove any existing pointers by clearing that renderer
             renderers[pointers].RemoveAllViewProps()
             self.disconnectAllSpinners()
-            self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+            self.iren.SetInteractorStyle(self.style)
             self.renwin.Render()
 
     def deleteGeometryBtnClicked(self):
         # When the Delete Blocks button is clicked
         # Clear other style buttons
         self.clearStylesExcept(style='deleteGeom')
-        print(self.deleteGeom.isChecked())
         if self.deleteGeom.isChecked():
             self.iren.SetInteractorStyle(deleteGeometryStyle(self.renwin))
         else:
-            self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+            self.iren.SetInteractorStyle(self.style)
             self.renwin.Render()
 
     # Use this to load the simuation in a separate renderer - use this after importing a plan and before stepping through the simulation
@@ -921,7 +916,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         renderers[pointers].RemoveAllViewProps()
         self.disconnectAllSpinners()
         self.setObstacle.setChecked(False)
-        self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+        self.iren.SetInteractorStyle(self.style)
         self.renwin.Render()
 
         return undoSet
@@ -1139,7 +1134,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         # After clicking on the save button, exit to standard style
         self.planningComboBox.setCurrentIndex(0)
         self.disconnectAllSpinners()
-        self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+        self.iren.SetInteractorStyle(self.style)
         self.renwin.Render()
 
     def Keypress(self, obj, event):
@@ -1159,7 +1154,6 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
             self.walls_floor("truncate")
         elif key == "p":
             self.writefile()
-
         elif key == "y":
             self.undoredo('redo')
         elif key == "z":

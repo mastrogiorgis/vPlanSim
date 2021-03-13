@@ -297,25 +297,6 @@ def structured_grid_2(lx, ly, lz, space):
     actor_obj.SetPosition(0, 0, 0)
     return actor_obj
 
-def worldCorners(lx, lz):
-    # Returns an actor which is four points, one in each corner of a square plane at y=0
-    # The points are transparent
-    # Required (for now) to force the scene to render cleanly
-    point = points()
-    point.InsertNextPoint(-lx, 0, -lz)
-    point.InsertNextPoint(-lx, 0, lz)
-    point.InsertNextPoint(lx, 0, -lz)
-    point.InsertNextPoint(lx, 0, lz)
-
-    polydata = d_struc(point)
-    glyph_obj = glyph(polydata)
-    mapper_obj = mapper(glyph_obj.GetOutputPort(), dtype=True)
-    actor_obj = actor(mapper_obj)
-    actor_obj.GetProperty().SetPointSize(1)
-    actor_obj.SetPosition(0, 0, 0)
-    actor_obj.GetProperty().SetOpacity(0)
-    return actor_obj
-
 class strut:
 
     def __init__(self):
