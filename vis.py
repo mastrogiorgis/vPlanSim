@@ -144,7 +144,7 @@ def pointer(x, y, z, radius):
     return pointer
 
 def cube_from_source(x, y, z, visibility, colour, transparency):
-    img = 'OIZV2N0.jpg'
+    # img = 'OIZV2N0.jpg'
 
     # Cast the positions to text so they can be added as labels
     labelX = str(x)
@@ -160,47 +160,47 @@ def cube_from_source(x, y, z, visibility, colour, transparency):
     cube_source.Update()
 
     # Create the caption to show the cube position
-    caption = vtk.vtkCaptionActor2D()
+    # caption = vtk.vtkCaptionActor2D()
     # caption.SetCaption("(" + labelX + ", " + labelY + ", " + labelZ + ")")
-    caption.SetCaption("(" + labelX + ", " + labelZ + ")")
+    # caption.SetCaption("(" + labelX + ", " + labelZ + ")")
 
     # Set the size of the caption box. The box is measured from the lower left corner to the upper right corner.
     # SetWidth and SetHeight are defined as fraction of the viewport.  So SetWidth(0.1) sets the caption box
     # to 10% the width of the viewport.
     # The caption text will then fill the provided caption box as best possible
-    caption.SetWidth(0.15)
-    caption.SetHeight(0.02)
-
-    caption.GetProperty().SetColor(colours['captionColour'])
-    caption.SetAttachmentPoint(cube_source.GetCenter())
+    # caption.SetWidth(0.15)
+    # caption.SetHeight(0.02)
+    #
+    # caption.GetProperty().SetColor(colours['captionColour'])
+    # caption.SetAttachmentPoint(cube_source.GetCenter())
 
     # Formatting of the text possible with vtkTextProperty
     # Disable the border box for the caption
-    caption.BorderOff()
+    # caption.BorderOff()
 
     # Set the initial visiblity of the caption
-    if visibility == False:
-        caption.GetCaptionTextProperty().SetOpacity(0)
-        caption.LeaderOff()
+    # if visibility == False:
+    #     caption.GetCaptionTextProperty().SetOpacity(0)
+    #     caption.LeaderOff()
 
     # read image
-    reader = vtk.vtkJPEGReader()
-    reader.SetFileName(img)
+    # reader = vtk.vtkJPEGReader()
+    # reader.SetFileName(img)
 
     # Create texture object from image
-    texture = vtk.vtkTexture()
-    texture.SetInputConnection(reader.GetOutputPort())
+    # texture = vtk.vtkTexture()
+    # texture.SetInputConnection(reader.GetOutputPort())
 
     # Map texture coordinates of the cube_source
-    map_to_plane = vtk.vtkTextureMapToPlane()
-    map_to_plane.SetInputConnection(cube_source.GetOutputPort())
+    # map_to_plane = vtk.vtkTextureMapToPlane()
+    # map_to_plane.SetInputConnection(cube_source.GetOutputPort())
 
     # Create polydatamapper and set the mapped texture as input
-    mapper = vtk.vtkPolyDataMapper()
-    mapper.SetInputConnection(map_to_plane.GetOutputPort())
+    # mapper = vtk.vtkPolyDataMapper()
+    # mapper.SetInputConnection(map_to_plane.GetOutputPort())
     # Create actor and set the mapper and the texture . uncomment if no texture
-    #  mapper = vtk.vtkPolyDataMapper()
-    # mapper.SetInputConnection(cube_source.GetOutputPort())
+    mapper = vtk.vtkPolyDataMapper()
+    mapper.SetInputConnection(cube_source.GetOutputPort())
     mapper.Update()
 
     # create the cube actor with the mapper
@@ -215,8 +215,8 @@ def cube_from_source(x, y, z, visibility, colour, transparency):
     # Assemble the cube and annotations into a complete prop actor.
     actor = vtk.vtkPropAssembly()
     actor.AddPart(cube)
-    actor.AddPart(caption)
-
+    # actor.AddPart(caption)
+    # actor.RemovePart(caption)
     return actor
 
 def floor_panel(origin, w, l):

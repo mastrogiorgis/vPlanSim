@@ -35,7 +35,7 @@ def setWalls(renwinRef, renderers, blocks, objLengthX, objHeightY, objWidthZ, pr
                     # Add the new prop to the blocks renderer
                     renderers[blocks].AddActor(actorcube)
                     # Add the new prop to the undoSet as well
-                    undoWalls.append(actorcube)
+                    # undoWalls.append(actorcube)
                     # Update the progress bar
                     iteration += 1
                     percentComplete = int((iteration / (numberPotentialCubes + 1)) * 100)
