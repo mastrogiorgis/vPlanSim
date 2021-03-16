@@ -5,6 +5,7 @@
 from vtk import vtkPropAssembly, vtkPropPicker, vtkPropCollection, vtkCaptionActor2D
 from vis import colours, opacities
 import scanScene
+import numpy as np
 
 def set_axis(renwinRef, renderers, annotations, axisRef, axesActor, key):
     # called when the axis button is clicked in the UI or the keypress 'a'
@@ -118,34 +119,26 @@ def toggleCaptions(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, 
     progressBarRef.setProperty("value", 0)
     iteration = 0
 
-    if (showCoordsRef.isChecked() == True):
-        # Add captions to the cube with the highest y-axis value
-        wallProps = scanScene.get_wall_props(renderers, blocks)
-        numberProps = len(wallProps)
-        for currentProp in wallProps:
-            tx, ty, tz = int(currentProp.GetBounds()[1]), int(currentProp.GetBounds()[3]), int(currentProp.GetBounds()[5])
-            # Now, test the world coordinate immediately "above" this prop by incrementing the y axis and performing a pick at that location.
-            # If the picker returns a 1 then there is a prop at the modified location.
-            # If there is a prop there then this prop is not the "highest" on the y-axis and therefore no caption is needed.
-            modty = ty + 1
-            picker = vtkPropPicker()
-            propAbove = picker.Pick3DPoint((tx,modty,tz), renderers[blocks])
-            print('picking')
-            if propAbove == 0:
-                print('This is on the top')
-                # This prop is the "highest" on the y-axis
-                caption = vtkCaptionActor2D()
-                caption.SetCaption("(" + str(tx) + ", " + str(tz) + ")")
-                caption.SetWidth(0.15)
-                caption.SetHeight(0.02)
-                caption.GetProperty().SetColor(colours['captionColour'])
-                caption.SetAttachmentPoint(tx, ty, tz)
-                caption.BorderOff()
-                currentProp.AddPart(caption)
-        # Update the progress bar
-        iteration += 1
-        percentComplete = int((iteration / numberProps) * 100)
-        progressBarRef.setProperty("value", percentComplete)
+    if showCoordsRef.isChecked() == True:
+        wallCoordinates, _, _ = scanScene.get_wall_positions(renderers, blocks)
+        maxLength, maxWidth, _, _ = scanScene.get_scene_bounds(renderers, blocks)
+
+        for x in range(maxLength + 1):
+            for z in range(maxWidth + 1):
+                subList = [point for point in wallCoordinates if point[0] == x and point[2] == z]
+                sortedSubList = sorted(subList, key=lambda k: [k[1]], reverse=True)
+                if len(sortedSubList) > 0:
+                    picker = vtkPropPicker()
+                    propPicked = picker.Pick3DPoint(sortedSubList[0], renderers[blocks])
+                    targetProp = picker.GetViewProp()
+                    caption = vtkCaptionActor2D()
+                    caption.SetCaption("(" + str(x) + ", " + str(z) + ")")
+                    caption.SetWidth(0.15)
+                    caption.SetHeight(0.02)
+                    caption.GetProperty().SetColor(colours['captionColour'])
+                    caption.SetAttachmentPoint(x, sortedSubList[0][1], z)
+                    caption.BorderOff()
+                    targetProp.AddPart(caption)
     else:
         # Remove all captions
         wallProps = scanScene.get_wall_props(renderers, blocks)
@@ -170,12 +163,9 @@ def toggleCaptions(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, 
                     # this actor is a caption type, so remove it
                     currentProp.RemovePart(currentActor)
 
-            # Update the progress bar
-            iteration += 1
-            percentComplete = int((iteration / numberProps) * 100)
-            progressBarRef.setProperty("value", percentComplete)
     renwinRef.Render()
     return
+
 
 
 def toggleWallTransparency(renwinRef, renderers, blocks, transparentRef, progressBarRef, key):
