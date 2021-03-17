@@ -244,6 +244,11 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         transform.Translate(-1.0, 0.0, -1.0)
         self.axes = vtkAxesActor()
         self.axes.SetUserTransform(transform)
+        self.axes.SetTotalLength(5.0, 5.0, 5.0)
+        self.axes.SetConeRadius(0.2)
+        self.axes.GetXAxisCaptionActor2D().GetCaptionTextProperty().BoldOff()
+        self.axes.GetYAxisCaptionActor2D().GetCaptionTextProperty().BoldOff()
+        self.axes.GetZAxisCaptionActor2D().GetCaptionTextProperty().BoldOff()
 
         #grid - call vis
         self.gridG = graphics.structured_grid_2(100, 0.1, 100, 0.5)

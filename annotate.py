@@ -136,7 +136,7 @@ def toggleCaptions(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, 
                     caption.SetWidth(0.15)
                     caption.SetHeight(0.02)
                     caption.GetProperty().SetColor(colours['captionColour'])
-                    caption.SetAttachmentPoint(x, sortedSubList[0][1], z)
+                    caption.SetAttachmentPoint(x, sortedSubList[0][1] + 0.4, z)
                     caption.BorderOff()
                     targetProp.AddPart(caption)
     else:
