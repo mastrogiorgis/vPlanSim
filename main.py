@@ -324,7 +324,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         # make the initial camera settings on the first renderer
         renderers[0].ResetCamera()
         self.camera.SetFocalPoint(0.0,0.0,0.0)
-        self.camera.SetPosition(10,0,-10)
+        self.camera.SetPosition(200,0,200)
         self.camera.SetViewUp(0.0,0.0,0.0)
 
         # set the camera for subsequent renderers to be the same camera as the first renderer
@@ -896,6 +896,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         x_center, z_center = self.findSceneCenter()
         self.camera.SetFocalPoint(x_center, 0, z_center)
         self.camera.SetPosition(posX, posY, posZ)
+        # self.camera.Elevation(100)
         self.camera.OrthogonalizeViewUp()
         renderers[0].ResetCamera()
         self.renwin.Render()
