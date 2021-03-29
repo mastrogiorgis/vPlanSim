@@ -8,6 +8,8 @@ VTK8.2 +
 
 PyQt5 +
 
+Use GPU dedicated graphics when running the tool to reduce memory usage
+
 
 ## Features of vPlanSim
 
