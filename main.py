@@ -244,13 +244,14 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         transform.Translate(-1.0, 0.0, -1.0)
         self.axes = vtkAxesActor()
         self.axes.SetUserTransform(transform)
+        self.axes.SetTotalLength(5.0, 5.0, 5.0)
+        self.axes.SetConeRadius(0.2)
+        self.axes.GetXAxisCaptionActor2D().GetCaptionTextProperty().BoldOff()
+        self.axes.GetYAxisCaptionActor2D().GetCaptionTextProperty().BoldOff()
+        self.axes.GetZAxisCaptionActor2D().GetCaptionTextProperty().BoldOff()
 
         #grid - call vis
         self.gridG = graphics.structured_grid_2(100, 0.1, 100, 0.5)
-
-        #corners
-        self.corners = graphics.worldCorners(100, 100)
-        renderers[annotations].AddActor(self.corners)
 
         #qt gui interaction
         # toggle axis UI
@@ -323,7 +324,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         # make the initial camera settings on the first renderer
         renderers[0].ResetCamera()
         self.camera.SetFocalPoint(0.0,0.0,0.0)
-        self.camera.SetPosition(10,0,-10)
+        self.camera.SetPosition(200,0,200)
         self.camera.SetViewUp(0.0,0.0,0.0)
 
         # set the camera for subsequent renderers to be the same camera as the first renderer
@@ -404,7 +405,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
             # Remove any existing pointers by clearing that renderer
             renderers[pointers].RemoveAllViewProps()
             self.disconnectAllSpinners()
-            self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+            self.iren.SetInteractorStyle(self.style)
             self.renwin.Render()
 
     def obstacleBtnClicked(self):
@@ -417,18 +418,17 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
             # Remove any existing pointers by clearing that renderer
             renderers[pointers].RemoveAllViewProps()
             self.disconnectAllSpinners()
-            self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+            self.iren.SetInteractorStyle(self.style)
             self.renwin.Render()
 
     def deleteGeometryBtnClicked(self):
         # When the Delete Blocks button is clicked
         # Clear other style buttons
         self.clearStylesExcept(style='deleteGeom')
-        print(self.deleteGeom.isChecked())
         if self.deleteGeom.isChecked():
             self.iren.SetInteractorStyle(deleteGeometryStyle(self.renwin))
         else:
-            self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+            self.iren.SetInteractorStyle(self.style)
             self.renwin.Render()
 
     # Use this to load the simuation in a separate renderer - use this after importing a plan and before stepping through the simulation
@@ -896,6 +896,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         x_center, z_center = self.findSceneCenter()
         self.camera.SetFocalPoint(x_center, 0, z_center)
         self.camera.SetPosition(posX, posY, posZ)
+        # self.camera.Elevation(100)
         self.camera.OrthogonalizeViewUp()
         renderers[0].ResetCamera()
         self.renwin.Render()
@@ -921,7 +922,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         renderers[pointers].RemoveAllViewProps()
         self.disconnectAllSpinners()
         self.setObstacle.setChecked(False)
-        self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+        self.iren.SetInteractorStyle(self.style)
         self.renwin.Render()
 
         return undoSet
@@ -1139,7 +1140,7 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
         # After clicking on the save button, exit to standard style
         self.planningComboBox.setCurrentIndex(0)
         self.disconnectAllSpinners()
-        self.iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+        self.iren.SetInteractorStyle(self.style)
         self.renwin.Render()
 
     def Keypress(self, obj, event):
@@ -1159,7 +1160,6 @@ class MainWindow(QtWidgets.QMainWindow, vPlanGUI_v012.Ui_MainWindow):
             self.walls_floor("truncate")
         elif key == "p":
             self.writefile()
-
         elif key == "y":
             self.undoredo('redo')
         elif key == "z":

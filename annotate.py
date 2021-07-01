@@ -2,9 +2,10 @@
 @authors G. Mastorakis, B. Lazaruk, J. Roberts
 """
 
-from vtk import vtkPropAssembly, vtkPropPicker, vtkPropCollection
+from vtk import vtkPropAssembly, vtkPropPicker, vtkPropCollection, vtkCaptionActor2D
 from vis import colours, opacities
 import scanScene
+import numpy as np
 
 def set_axis(renwinRef, renderers, annotations, axisRef, axesActor, key):
     # called when the axis button is clicked in the UI or the keypress 'a'
@@ -42,7 +43,7 @@ def set_grid(renwinRef, renderers, annotations, gridRef, gridActor, key):
     renwinRef.Render()
     return
 
-def toggleCaptions(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, key):
+def toggleCaptionsold(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, key):
     # Activates on keypress "c"
     # If the key is used, switch the status of the checkbox
     if (key == 'key'):
@@ -105,6 +106,67 @@ def toggleCaptions(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, 
         progressBarRef.setProperty("value", percentComplete)
     renwinRef.Render()
     return
+
+def toggleCaptions(renwinRef, renderers, blocks, showCoordsRef, progressBarRef, key):
+    # Activates on keypress "c"
+    # If the key is used, switch the status of the checkbox
+    if (key == 'key'):
+        if (showCoordsRef.isChecked() == True):
+            showCoordsRef.setChecked(False)
+        else:
+            showCoordsRef.setChecked(True)
+
+    progressBarRef.setProperty("value", 0)
+    iteration = 0
+
+    if showCoordsRef.isChecked() == True:
+        wallCoordinates, _, _ = scanScene.get_wall_positions(renderers, blocks)
+        maxLength, maxWidth, _, _ = scanScene.get_scene_bounds(renderers, blocks)
+
+        for x in range(maxLength + 1):
+            for z in range(maxWidth + 1):
+                subList = [point for point in wallCoordinates if point[0] == x and point[2] == z]
+                sortedSubList = sorted(subList, key=lambda k: [k[1]], reverse=True)
+                if len(sortedSubList) > 0:
+                    picker = vtkPropPicker()
+                    propPicked = picker.Pick3DPoint(sortedSubList[0], renderers[blocks])
+                    targetProp = picker.GetViewProp()
+                    caption = vtkCaptionActor2D()
+                    caption.SetCaption("(" + str(x) + ", " + str(z) + ")")
+                    caption.SetWidth(0.15)
+                    caption.SetHeight(0.02)
+                    caption.GetProperty().SetColor(colours['captionColour'])
+                    caption.SetAttachmentPoint(x, sortedSubList[0][1] + 0.4, z)
+                    caption.BorderOff()
+                    targetProp.AddPart(caption)
+    else:
+        # Remove all captions
+        wallProps = scanScene.get_wall_props(renderers, blocks)
+        numberProps = len(wallProps)
+        for currentProp in wallProps:
+            numberOfActors = currentProp.GetNumberOfPaths()
+
+            # setup a vtkPropAssembly to store the assembly of parts that make up the current prop, and populate it
+            actorCollection = vtkPropAssembly()
+            actorCollection = currentProp.GetParts()
+
+            # and initiate traversal over the collection of parts/actors
+            actorCollection.InitTraversal()
+            for actor in range(numberOfActors):
+                # now iterate over each actor
+                # move to the next actor in the collection
+                currentActor = actorCollection.GetNextProp()
+                # check if this actor is a caption type, and if so then set its opacity based on the checkbox and "height"
+                # method returns a 1 if the type of the actor matches the argument, otherwise returns a 0
+                typeBool = currentActor.IsTypeOf("vtkCaptionActor2D")
+                if typeBool == 1:
+                    # this actor is a caption type, so remove it
+                    currentProp.RemovePart(currentActor)
+
+    renwinRef.Render()
+    return
+
+
 
 def toggleWallTransparency(renwinRef, renderers, blocks, transparentRef, progressBarRef, key):
     # Currently doesn't respond to keypreses

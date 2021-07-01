@@ -125,7 +125,7 @@ def get_floor_actors(renderers, blocks):
 
 def get_wall_positions(renderers, blocks):
     # Returns all walls, which is the positions of all cube actors, external walls which is the position of all
-    # cubes of colour = 'extWallInert', and internal walls which is cube actors that are not external walls.
+    # cubes of colour = 'extWall*', and internal walls which is cube actors that are not external walls.
     # This will include ALL goals and entry points, even if they are on external walls.
 
     # Set up lists, some need to exist so they can be returned even if empty, some so they can be appended to
